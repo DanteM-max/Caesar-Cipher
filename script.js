@@ -22,7 +22,7 @@ function encrypt() {
     for (let i = 0; i < userText.length; i++) {
         //get curr char use String.prototype.charAt() and use String.prototype.toLowercase()
         let curr=userText.charAt(i).toLowerCase();
-        if (curr == " " || curr == "." || curr == "!" || curr == "?" || curr == ',' || curr == ';') {
+        if (curr == " " || curr == "." || curr == "!" || curr == "?" || curr == ',' || curr == ';' || curr == '(' || curr == ')' || curr == `'` || curr == `"`) {
             result += curr;
             console.log("Loop continued. Check to see if this was intentional.");
             continue;
@@ -67,7 +67,7 @@ function decrypt() {
         //get curr char use String.prototype.charAt() and use String.prototype.toLowercase()
         let curr=userText.charAt(i).toLowerCase();
 
-        if (curr == " " || curr == "." || curr == "!" || curr == "?" || curr == ',' || curr == ";") {
+        if (curr == " " || curr == "." || curr == "!" || curr == "?" || curr == ',' || curr == ";" || curr == '(' || curr == ')' || curr == `'` || curr == `"`) {
             result += curr;
             console.log("Loop continued. Check to see if this was intentional.");
             continue;
