@@ -22,6 +22,11 @@ function encrypt() {
     for (let i = 0; i < userText.length; i++) {
         //get curr char use String.prototype.charAt() and use String.prototype.toLowercase()
         let curr=userText.charAt(i).toLowerCase();
+        if (curr == " " || curr == "." || curr == "!" || curr == "?" || curr == ',' || curr == ';') {
+            result += curr;
+            console.log("Loop continued. Check to see if this was intentional.");
+            continue;
+        }
         console.log(curr);
         //get index of char in alpha
         let currIndexInAlpha = alpha.indexOf(curr);
@@ -30,12 +35,64 @@ function encrypt() {
         let cipherIndex = (currIndexInAlpha + key) % 26;
         console.log("cipherIndex = " + cipherIndex);
         //get encrypted number and use it to get char from alpha, like alpha[encryptedNum]
-
+        let encryptedChar = alpha[cipherIndex];
+        console.log("encryptedChar = " + encryptedChar);
         //concatenate into string
+        result += encryptedChar
+        console.log("result = " + result);
     }
     //display result in result.box
+    let resultBox = document.getElementById("result");
+    resultBox.value = result;
+    console.log("Message encrypted, general. ");
 }
 
 function decrypt() {
     console.log("Decrypting...");
+
+    //get user message from box
+    let userBox = document.getElementById("messageInput");
+
+    let userText = userBox.value;
+    console.log("userText = " + userText);
+    //get key from special number selector. and parseInt so that we can use it
+    let keyBox = document.getElementById("key");
+    
+    let key = parseInt(keyBox.value);
+    console.log("key = " + key);
+    //create empty string var to store result
+    let result = "";
+    // convert string to numbers with for loop
+    for (let i = 0; i < userText.length; i++) {
+        //get curr char use String.prototype.charAt() and use String.prototype.toLowercase()
+        let curr=userText.charAt(i).toLowerCase();
+
+        if (curr == " " || curr == "." || curr == "!" || curr == "?" || curr == ',' || curr == ";") {
+            result += curr;
+            console.log("Loop continued. Check to see if this was intentional.");
+            continue;
+        }
+        console.log(curr);
+        //get index of char in alpha
+        let currIndexInAlpha = alpha.indexOf(curr);
+        console.log(currIndexInAlpha);
+        //apply formula ((x+k)%26) for encrypted nummber
+        let cipherIndex = (currIndexInAlpha - key) % 26;
+        console.log("cipherIndex = " + cipherIndex);
+
+        if (cipherIndex < 0) {
+            cipherIndex += 26;
+            console.log("new cipherIndex = " + cipherIndex);
+        }
+        //get encrypted number and use it to get char from alpha, like alpha[encryptedNum]
+        let encryptedChar = alpha[cipherIndex];
+        console.log("encryptedChar = " + encryptedChar);
+        //concatenate into string
+        result += encryptedChar
+        console.log("result = " + result);
+    }
+    //display result in result.box
+    let resultBox = document.getElementById("result");
+    resultBox.value = result;
+    console.log("Message encrypted, general. ");
 }
